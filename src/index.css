@@ -140,3 +140,37 @@ a {
     transform: rotate(180deg);
   }
 }
+
+.bookmark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px;
+  padding: 20px 50px;
+  border: 1px solid var(--elColor);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+.bookmark:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 10px var(--elColor);
+  cursor: pointer;
+}
+
+.bookmark .label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bookmark .service {
+  font-size: 40px;
+}
+
+.bookmark .stopName {
+  font-size: 20px;
+}
+
+.bookmark .stopCode {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}

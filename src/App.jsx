@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import All from "./pages/All";
 import Detail from "./pages/Detail";
-import Favourite from "./pages/Favourite";
+import Bookmarks from "./pages/Bookmarks";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/" element={<Navigate replace to="/all" />} />
         <Route path="/all" element={<All />} />
         <Route path="/all/:service/:stop" element={<Detail />} />
-        <Route path="/favourite" element={<Favourite />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
