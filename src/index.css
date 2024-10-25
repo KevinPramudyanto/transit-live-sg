@@ -1,6 +1,6 @@
 :root {
-  --bgColor: rgb(16, 19, 28);
-  --elColor: rgb(160, 210, 235);
+  --bgColor: black;
+  --elColor: white;
 }
 
 * {
@@ -16,23 +16,127 @@ body {
   background: var(--bgColor);
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-evenly;
-  margin: 30px;
+  align-items: center;
   padding: 20px;
   font-size: 30px;
-}
-
-.busServices {
-  margin: 30px;
-  padding: 20px;
+  background: rgba(0, 0, 255, 0.1);
 }
 
 .busService {
   display: flex;
   justify-content: space-between;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid var(--elColor);
+  border-radius: 10px;
   font-size: 25px;
+}
+.busService:hover {
+  cursor: pointer;
+}
+
+.busService img {
+  height: 25px;
+}
+
+.direction {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stop {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid var(--elColor);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+.stop:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px var(--elColor);
+  cursor: pointer;
+}
+
+.stop .stopName {
+  font-size: 20px;
+}
+
+.stop .stopCode {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.detail {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+.detail .busNo {
+  font-size: 50px;
+}
+
+.detail img {
+  height: 50px;
+  transition: 0.3s;
+}
+.detail img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.detail .stopName {
+  font-size: 40px;
+}
+
+.detail .stopCode {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.duration {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid var(--elColor);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+.duration:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 10px var(--elColor);
+  cursor: pointer;
+}
+
+.duration .next {
+  font-size: 240px;
+}
+
+.duration .subsequent {
+  font-size: 100px;
+}
+
+.loader {
+  width: 300px;
+  aspect-ratio: 1;
+  margin: 50px auto;
+  border-radius: 50%;
+  border: 20px solid;
+  border-color: var(--elColor) var(--bgColor);
+  animation: rotate 1s infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(180deg);
+  }
 }

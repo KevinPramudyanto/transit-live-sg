@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="navbar">
-      <Link to="/all">All</Link>
-      <Link to="/favourite">Favourite</Link>
+      <Link to="/all">ALL</Link>
+      <Link to="/favourite">FAVOURITE</Link>
     </div>
   );
 };
