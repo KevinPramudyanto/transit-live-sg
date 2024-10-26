@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { busStops } from "../components/busStops.js";
 import bookmark from "../assets/bookmark.png";
 
@@ -7,6 +7,7 @@ const Detail = () => {
   const [buses, setBuses] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
+  const navigate = useNavigate();
   let nextDuration = "NA";
   let next2Duration = "NA";
   let next3Duration = "NA";
@@ -102,15 +103,43 @@ const Detail = () => {
     }
   }
 
-  const handleClick = () => {
-    getBuses();
+  const postBookmark = async () => {
+    try {
+      const res = await fetch(
+        "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks",
+        {
+          method: "POST",
+          headers: {
+            Authorization: import.meta.env.VITE_AUTHORIZATION,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            records: [
+              { fields: { service: params.service, stop: params.stop } },
+            ],
+          }),
+        }
+      );
+      if (!res.ok) {
+        throw new Error("Server Error");
+      }
+      navigate("/bookmarks");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <>
       <div className="detail">
         <div className="busNo">Bus No. {params.service}</div>
-        <img src={bookmark} alt="bookmark" />
+        <img
+          src={bookmark}
+          alt="bookmark"
+          onClick={() => {
+            postBookmark();
+          }}
+        />
         <div>
           <div className="stopName">
             {(typeof busStops?.[params.stop]?.[2] === "string" &&
@@ -126,7 +155,7 @@ const Detail = () => {
         </div>
       </div>
       {!isLoading && (
-        <div className="duration" onClick={handleClick}>
+        <div className="duration" onClick={getBuses}>
           <div className="next" style={{ color: nextLoad }}>
             {nextDuration}
           </div>
