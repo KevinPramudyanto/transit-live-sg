@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Direction from "./Direction";
-import minus from "../assets/minus.png";
-import plus from "../assets/plus.png";
+import up from "../assets/up.png";
+import down from "../assets/down.png";
 
 const Service = ({ busServices, busService }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,23 +14,28 @@ const Service = ({ busServices, busService }) => {
     <>
       <div className="busService" onClick={handleClick}>
         <span>{busService}</span>
-        <span>{busServices[busService].name}</span>
-        {isOpen ? (
-          <img src={minus} alt="closed" />
-        ) : (
-          <img src={plus} alt="open" />
-        )}
+        <span>
+          {(typeof busServices?.[busService]?.name === "string" &&
+            busServices?.[busService]?.name) ||
+            "NA"}
+        </span>
+        {isOpen ? <img src={up} alt="closed" /> : <img src={down} alt="open" />}
       </div>
 
       <div className="direction">
         {isOpen &&
-          busServices[busService].routes.map((direction, idx) => (
-            <Direction
-              key={idx}
-              busService={busService}
-              direction={direction}
-            />
-          ))}
+          busServices?.[busService]?.routes &&
+          Array.isArray(busServices?.[busService]?.routes) &&
+          busServices?.[busService]?.routes.map(
+            (direction, idx) =>
+              Array.isArray(direction) && (
+                <Direction
+                  key={idx}
+                  busService={busService}
+                  direction={direction}
+                />
+              )
+          )}
       </div>
     </>
   );

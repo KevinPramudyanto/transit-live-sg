@@ -5,9 +5,15 @@ import { busServices } from "../components/busServices.js";
 const All = () => {
   return (
     <>
-      {Object.keys(busServices).map((busService, idx) => (
-        <Service key={idx} busServices={busServices} busService={busService} />
-      ))}
+      {busServices !== null &&
+        typeof busServices === "object" &&
+        Object.keys(busServices).map((busService, idx) => (
+          <Service
+            key={idx}
+            busServices={busServices}
+            busService={busService}
+          />
+        ))}
     </>
   );
 };

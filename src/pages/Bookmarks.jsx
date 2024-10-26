@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { busStops } from "../components/busStops.js";
-import { Link } from "react-router-dom";
+import Bookmark from "../components/Bookmark.jsx";
 
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState({});
@@ -14,14 +13,32 @@ const Bookmarks = () => {
         { headers: { Authorization: import.meta.env.VITE_AUTHORIZATION } }
       );
       if (!res.ok) {
-        throw new Error("error");
+        throw new Error("Server Error");
       }
       const data = await res.json();
       setBookmarks(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setIsLoading(false);
+  };
+
+  const deleteBookmark = async (id) => {
+    try {
+      const res = await fetch(
+        "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks/" + id,
+        {
+          method: "DELETE",
+          headers: { Authorization: import.meta.env.VITE_AUTHORIZATION },
+        }
+      );
+      if (!res.ok) {
+        throw new Error("Server Error");
+      }
+      getBookmarks();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -31,26 +48,9 @@ const Bookmarks = () => {
   return (
     <>
       {!isLoading &&
-        bookmarks.records.map((record) => (
-          <Link
-            key={record.id}
-            to={"/all/" + record.fields.service + "/" + record.fields.stop}
-          >
-            <div className="bookmark">
-              <div>
-                <div className="label">Bus No</div>
-                <div className="service">{record.fields.service}</div>
-              </div>
-              <div>
-                <div className="stopName">
-                  {busStops[record.fields.stop][2]}
-                </div>
-                <div className="stopCode">
-                  {record.fields.stop} {busStops[record.fields.stop][3]}
-                </div>
-              </div>
-            </div>
-          </Link>
+        Array.isArray(bookmarks.records) &&
+        bookmarks.records.map((record, idx) => (
+          <Bookmark key={idx} record={record} deleteBookmark={deleteBookmark} />
         ))}
     </>
   );

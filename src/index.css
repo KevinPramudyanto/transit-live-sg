@@ -174,3 +174,12 @@ a {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
 }
+
+.bookmark img {
+  height: 40px;
+  transition: 0.3s;
+}
+.bookmark img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}

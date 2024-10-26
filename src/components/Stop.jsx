@@ -6,9 +6,16 @@ const Stop = ({ busService, stop }) => {
   return (
     <Link to={"/all/" + busService + "/" + stop}>
       <div className="stop">
-        <div className="stopName">{busStops[stop][2]}</div>
+        <div className="stopName">
+          {(typeof busStops?.[stop]?.[2] === "string" &&
+            busStops?.[stop]?.[2]) ||
+            "NA"}
+        </div>
         <div className="stopCode">
-          {stop} {busStops[stop][3]}
+          {stop}{" "}
+          {(typeof busStops?.[stop]?.[3] === "string" &&
+            busStops?.[stop]?.[3]) ||
+            "NA"}
         </div>
       </div>
     </Link>

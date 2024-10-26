@@ -21,12 +21,12 @@ const Detail = () => {
         "https://arrivelah2.busrouter.sg/?id=" + params.stop
       );
       if (!res.ok) {
-        throw new Error("error");
+        throw new Error("Server Error");
       }
       const data = await res.json();
       setBuses(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setIsLoading(false);
   };
@@ -36,23 +36,33 @@ const Detail = () => {
   }, []);
 
   if (!isLoading) {
-    for (const item of buses.services) {
-      if (item.no === params.service) {
-        nextDuration = item?.next?.duration_ms || "NA";
+    for (const item of (Array.isArray(buses?.services) && buses?.services) ||
+      []) {
+      if (item?.no === params.service) {
+        nextDuration =
+          (typeof item?.next?.duration_ms === "number" &&
+            item?.next?.duration_ms) ||
+          "NA";
         if (typeof nextDuration === "number") {
           nextDuration =
             Math.floor(nextDuration / 60000) > 0
               ? Math.floor(nextDuration / 60000)
               : 0;
         }
-        next2Duration = item?.next2?.duration_ms || "NA";
+        next2Duration =
+          (typeof item?.next2?.duration_ms === "number" &&
+            item?.next2?.duration_ms) ||
+          "NA";
         if (typeof next2Duration === "number") {
           next2Duration =
             Math.floor(next2Duration / 60000) > 0
               ? Math.floor(next2Duration / 60000)
               : 0;
         }
-        next3Duration = item?.next3?.duration_ms || "NA";
+        next3Duration =
+          (typeof item?.next3?.duration_ms === "number" &&
+            item?.next3?.duration_ms) ||
+          "NA";
         if (typeof next3Duration === "number") {
           next3Duration =
             Math.floor(next3Duration / 60000) > 0
@@ -61,27 +71,27 @@ const Detail = () => {
         }
 
         nextLoad = item?.next?.load || "green";
-        if (typeof nextLoad === "SDA") {
+        if (nextLoad === "SDA") {
           nextLoad = "yellow";
-        } else if (typeof nextLoad === "LSD") {
+        } else if (nextLoad === "LSD") {
           nextLoad = "red";
         } else {
           nextLoad = "green";
         }
 
         next2Load = item?.next2?.load || "green";
-        if (typeof next2Load === "SDA") {
+        if (next2Load === "SDA") {
           next2Load = "yellow";
-        } else if (typeof next2Load === "LSD") {
+        } else if (next2Load === "LSD") {
           next2Load = "red";
         } else {
           next2Load = "green";
         }
 
         next3Load = item?.next3?.load || "green";
-        if (typeof next3Load === "SDA") {
+        if (next3Load === "SDA") {
           next3Load = "yellow";
-        } else if (typeof next3Load === "LSD") {
+        } else if (next3Load === "LSD") {
           next3Load = "red";
         } else {
           next3Load = "green";
@@ -102,9 +112,16 @@ const Detail = () => {
         <div className="busNo">Bus No. {params.service}</div>
         <img src={bookmark} alt="bookmark" />
         <div>
-          <div className="stopName">{busStops[params.stop][2]}</div>
+          <div className="stopName">
+            {(typeof busStops?.[params.stop]?.[2] === "string" &&
+              busStops?.[params.stop]?.[2]) ||
+              "NA"}
+          </div>
           <div className="stopCode">
-            {params.stop} {busStops[params.stop][3]}
+            {params.stop}{" "}
+            {(typeof busStops?.[params.stop]?.[3] === "string" &&
+              busStops?.[params.stop]?.[3]) ||
+              "NA"}
           </div>
         </div>
       </div>
