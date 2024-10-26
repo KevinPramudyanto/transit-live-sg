@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import Direction from "./Direction";
 
-const Service = ({ busServices, service }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
-  };
-
+const Service = ({ busServices, service, isOpen, handleDropdown }) => {
   return (
     <div className="serviceContainer">
-      <div className="container" onClick={handleClick}>
+      <div className="container" onClick={() => handleDropdown(service)}>
         <div>
           <div className="label">Bus No</div>
           <div className="service">{service}</div>
@@ -20,10 +14,10 @@ const Service = ({ busServices, service }) => {
             busServices?.[service]?.name) ||
             "NA"}
         </div>
-        <div className={isOpen ? "arrowUp" : "arrowDown"}></div>
+        <div className={isOpen?.[service] ? "arrowUp" : "arrowDown"}></div>
       </div>
 
-      {isOpen &&
+      {isOpen?.[service] &&
         busServices?.[service]?.routes &&
         Array.isArray(busServices?.[service]?.routes) && (
           <div className="direction">
