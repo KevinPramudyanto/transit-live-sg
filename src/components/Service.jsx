@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Direction from "./Direction";
-import up from "../assets/up.png";
-import down from "../assets/down.png";
 
-const Service = ({ busServices, busService }) => {
+const Service = ({ busServices, service }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -11,33 +9,37 @@ const Service = ({ busServices, busService }) => {
   };
 
   return (
-    <>
-      <div className="busService" onClick={handleClick}>
-        <span>{busService}</span>
-        <span>
-          {(typeof busServices?.[busService]?.name === "string" &&
-            busServices?.[busService]?.name) ||
+    <div className="serviceContainer">
+      <div className="container" onClick={handleClick}>
+        <div>
+          <div className="label">Bus No</div>
+          <div className="service">{service}</div>
+        </div>
+        <div className="name">
+          {(typeof busServices?.[service]?.name === "string" &&
+            busServices?.[service]?.name) ||
             "NA"}
-        </span>
-        {isOpen ? <img src={up} alt="closed" /> : <img src={down} alt="open" />}
+        </div>
+        <div className={isOpen ? "arrowUp" : "arrowDown"}></div>
       </div>
 
-      <div className="direction">
-        {isOpen &&
-          busServices?.[busService]?.routes &&
-          Array.isArray(busServices?.[busService]?.routes) &&
-          busServices?.[busService]?.routes.map(
-            (direction, idx) =>
-              Array.isArray(direction) && (
-                <Direction
-                  key={idx}
-                  busService={busService}
-                  direction={direction}
-                />
-              )
-          )}
-      </div>
-    </>
+      {isOpen &&
+        busServices?.[service]?.routes &&
+        Array.isArray(busServices?.[service]?.routes) && (
+          <div className="direction">
+            {busServices?.[service]?.routes.map(
+              (direction, idx) =>
+                Array.isArray(direction) && (
+                  <Direction
+                    key={idx}
+                    service={service}
+                    direction={direction}
+                  />
+                )
+            )}
+          </div>
+        )}
+    </div>
   );
 };
 

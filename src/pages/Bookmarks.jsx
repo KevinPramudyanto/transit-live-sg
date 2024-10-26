@@ -52,6 +52,7 @@ const Bookmarks = () => {
         bookmarks.records.map((record, idx) => (
           <Bookmark key={idx} record={record} deleteBookmark={deleteBookmark} />
         ))}
+      {isLoading && <div className="loader"></div>}
     </>
   );
 };

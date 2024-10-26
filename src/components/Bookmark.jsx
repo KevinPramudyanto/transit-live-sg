@@ -5,28 +5,30 @@ import bin from "../assets/bin.png";
 
 const Bookmark = ({ record, deleteBookmark }) => {
   return (
-    <Link to={"/all/" + record.fields.service + "/" + record.fields.stop}>
-      <div className="bookmark">
-        <div>
-          <div className="label">Bus No</div>
-          <div className="service">{record.fields.service}</div>
-        </div>
-        <div>
-          <div className="stopName">
-            {(typeof busStops?.[record.fields.stop]?.[2] === "string" &&
-              busStops?.[record.fields.stop]?.[2]) ||
-              "NA"}
+    <div className="bookmarkContainer">
+      <Link to={"/all/bus/" + record.fields.service + "/" + record.fields.stop}>
+        <div className="bookmark">
+          <div>
+            <div className="label">Bus No</div>
+            <div className="service">{record.fields.service}</div>
           </div>
-          <div className="stopCode">
-            {record.fields.stop}{" "}
-            {(typeof busStops?.[record.fields.stop]?.[3] === "string" &&
-              busStops?.[record.fields.stop]?.[3]) ||
-              "NA"}
+          <div>
+            <div className="stopName">
+              {(typeof busStops?.[record.fields.stop]?.[2] === "string" &&
+                busStops?.[record.fields.stop]?.[2]) ||
+                "NA"}
+            </div>
+            <div className="stopCode">
+              {record.fields.stop}{" "}
+              {(typeof busStops?.[record.fields.stop]?.[3] === "string" &&
+                busStops?.[record.fields.stop]?.[3]) ||
+                "NA"}
+            </div>
           </div>
         </div>
-        <img src={bin} alt="delete" onClick={() => deleteBookmark(record.id)} />
-      </div>
-    </Link>
+      </Link>
+      <img src={bin} alt="delete" onClick={() => deleteBookmark(record.id)} />
+    </div>
   );
 };
 

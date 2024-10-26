@@ -1,13 +1,13 @@
 import React from "react";
 import Stop from "./Stop.jsx";
 
-const Direction = ({ busService, direction }) => {
+const Direction = ({ service, direction }) => {
   return (
     <div>
       {direction.map(
         (stop, idx) =>
           typeof stop === "string" && (
-            <Stop key={idx} busService={busService} stop={stop} />
+            <Stop key={idx} service={service} stop={stop} />
           )
       )}
     </div>

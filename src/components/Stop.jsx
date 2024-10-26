@@ -2,9 +2,9 @@ import React from "react";
 import { busStops } from "./busStops.js";
 import { Link } from "react-router-dom";
 
-const Stop = ({ busService, stop }) => {
+const Stop = ({ service, stop }) => {
   return (
-    <Link to={"/all/" + busService + "/" + stop}>
+    <Link to={"/all/bus/" + service + "/" + stop}>
       <div className="stop">
         <div className="stopName">
           {(typeof busStops?.[stop]?.[2] === "string" &&

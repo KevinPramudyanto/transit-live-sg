@@ -7,12 +7,8 @@ const All = () => {
     <>
       {busServices !== null &&
         typeof busServices === "object" &&
-        Object.keys(busServices).map((busService, idx) => (
-          <Service
-            key={idx}
-            busServices={busServices}
-            busService={busService}
-          />
+        Object.keys(busServices).map((service, idx) => (
+          <Service key={idx} busServices={busServices} service={service} />
         ))}
     </>
   );

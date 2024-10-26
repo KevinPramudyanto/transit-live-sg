@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 import All from "./pages/All";
 import Detail from "./pages/Detail";
 import Bookmarks from "./pages/Bookmarks";
@@ -9,11 +9,11 @@ import NotFound from "./pages/NotFound";
 const App = () => {
   return (
     <>
-      <NavBar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate replace to="/all" />} />
         <Route path="/all" element={<All />} />
-        <Route path="/all/:service/:stop" element={<Detail />} />
+        <Route path="/all/bus/:service/:stop" element={<Detail />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
