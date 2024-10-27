@@ -24,6 +24,7 @@ const Bookmarks = () => {
   };
 
   const deleteBookmark = async (id) => {
+    setIsLoading(true);
     try {
       const res = await fetch(
         "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks/" + id,
@@ -39,6 +40,7 @@ const Bookmarks = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {

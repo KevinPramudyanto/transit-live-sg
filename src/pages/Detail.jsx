@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { busStops } from "../components/busStops.js";
+import { trainStops } from "../components/trainStops.js";
 import bookmark from "../assets/bookmark.png";
 
 const Detail = () => {
   const [buses, setBuses] = useState({});
+  const [trains, setTrains] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
@@ -32,11 +34,32 @@ const Detail = () => {
     setIsLoading(false);
   };
 
+  const getTrains = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch("https://sg-rail-crowd.cheeaun.workers.dev");
+      if (!res.ok) {
+        throw new Error("Server Error");
+      }
+      const data = await res.json();
+      setTrains(data);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    getBuses();
+    if (params.mode === "bus") {
+      getBuses();
+    } else if (params.mode === "train") {
+      getTrains();
+    } else {
+      navigate("/404");
+    }
   }, []);
 
-  if (!isLoading) {
+  if (!isLoading && params.mode === "bus") {
     for (const item of (Array.isArray(buses?.services) && buses?.services) ||
       []) {
       if (item?.no === params.service) {
@@ -103,7 +126,26 @@ const Detail = () => {
     }
   }
 
+  if (!isLoading && params.mode === "train") {
+    for (const item of (Array.isArray(trains?.data) && trains?.data) || []) {
+      if (item?.station === params.stop) {
+        nextLoad = item?.crowdLevel || "green";
+        if (nextLoad === "m") {
+          nextLoad = "yellow";
+        } else if (nextLoad === "h") {
+          nextLoad = "red";
+        } else {
+          nextLoad = "green";
+        }
+        break;
+      }
+    }
+    next2Load = nextLoad;
+    next3Load = nextLoad;
+  }
+
   const postBookmark = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(
         "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks",
@@ -115,7 +157,13 @@ const Detail = () => {
           },
           body: JSON.stringify({
             records: [
-              { fields: { service: params.service, stop: params.stop } },
+              {
+                fields: {
+                  service: params.service,
+                  stop: params.stop,
+                  mode: params.mode,
+                },
+              },
             ],
           }),
         }
@@ -127,12 +175,17 @@ const Detail = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
     <>
       <div className="detail">
-        <div className="busNo">Bus No. {params.service}</div>
+        <div className="busNo">
+          {params.mode === "bus" && "Bus No. "}
+          {params.mode === "train" && "Route "}
+          {params.service}
+        </div>
         <img
           src={bookmark}
           alt="bookmark"
@@ -142,20 +195,29 @@ const Detail = () => {
         />
         <div>
           <div className="stopName">
-            {(typeof busStops?.[params.stop]?.[2] === "string" &&
-              busStops?.[params.stop]?.[2]) ||
-              "NA"}
+            {params.mode === "bus" &&
+              ((typeof busStops?.[params.stop]?.[2] === "string" &&
+                busStops?.[params.stop]?.[2]) ||
+                "NA")}
+            {params.mode === "train" &&
+              ((typeof trainStops?.[params.stop] === "string" &&
+                trainStops?.[params.stop]) ||
+                "NA")}
           </div>
           <div className="stopCode">
             {params.stop}{" "}
-            {(typeof busStops?.[params.stop]?.[3] === "string" &&
-              busStops?.[params.stop]?.[3]) ||
-              "NA"}
+            {params.mode === "bus" &&
+              ((typeof busStops?.[params.stop]?.[3] === "string" &&
+                busStops?.[params.stop]?.[3]) ||
+                "NA")}
           </div>
         </div>
       </div>
       {!isLoading && (
-        <div className="duration" onClick={getBuses}>
+        <div
+          className="duration"
+          onClick={params.mode === "bus" ? getBuses : getTrains}
+        >
           <div className="next" style={{ color: nextLoad }}>
             {nextDuration}
           </div>

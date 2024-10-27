@@ -13,7 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="/all" />} />
         <Route path="/all" element={<All />} />
-        <Route path="/all/bus/:service/:stop" element={<Detail />} />
+        <Route path="/all/:mode/:service/:stop" element={<Detail />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
