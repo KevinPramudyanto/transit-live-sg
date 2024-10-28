@@ -88,6 +88,12 @@ const All = () => {
               isBusSelected={isBusSelected}
             />
           ))}
+      {busServices !== null &&
+        typeof busServices === "object" &&
+        isBusSelected &&
+        Object.keys(busServices).filter((service) =>
+          service.toLowerCase().includes(search.toLowerCase())
+        ).length === 0 && <div>No bus matches your query</div>}
       {trainServices !== null &&
         typeof trainServices === "object" &&
         !isBusSelected &&
@@ -105,6 +111,12 @@ const All = () => {
               isBusSelected={isBusSelected}
             />
           ))}
+      {trainServices !== null &&
+        typeof trainServices === "object" &&
+        !isBusSelected &&
+        Object.keys(trainServices).filter((service) =>
+          service.toLowerCase().includes(search.toLowerCase())
+        ).length === 0 && <div>No train matches your query</div>}
     </>
   );
 };

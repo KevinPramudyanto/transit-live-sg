@@ -60,6 +60,9 @@ const Bookmarks = () => {
               deleteBookmark={deleteBookmark}
             />
           ))}
+      {!isLoading &&
+        Array.isArray(bookmarks.records) &&
+        bookmarks.records.length === 0 && <div>Your bookmarks is empty</div>}
       {isLoading && <div className="loader"></div>}
     </>
   );
