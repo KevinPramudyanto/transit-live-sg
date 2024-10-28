@@ -51,9 +51,15 @@ const Bookmarks = () => {
     <>
       {!isLoading &&
         Array.isArray(bookmarks.records) &&
-        bookmarks.records.map((record, idx) => (
-          <Bookmark key={idx} record={record} deleteBookmark={deleteBookmark} />
-        ))}
+        bookmarks.records
+          .sort((a, b) => Date.parse(b.createdTime) - Date.parse(a.createdTime))
+          .map((record, idx) => (
+            <Bookmark
+              key={idx}
+              record={record}
+              deleteBookmark={deleteBookmark}
+            />
+          ))}
       {isLoading && <div className="loader"></div>}
     </>
   );
