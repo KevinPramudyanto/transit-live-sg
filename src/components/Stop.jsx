@@ -11,6 +11,7 @@ const Stop = ({ service, stop }) => {
             busStops?.[stop]?.[2]) ||
             "NA"}
         </div>
+
         <div className="stopCode">
           {stop}{" "}
           {(typeof busStops?.[stop]?.[3] === "string" &&

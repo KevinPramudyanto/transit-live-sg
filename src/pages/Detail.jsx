@@ -211,6 +211,7 @@ const Detail = () => {
           </div>
         </div>
       </div>
+
       {!isGetLoading && (
         <div
           className="duration"

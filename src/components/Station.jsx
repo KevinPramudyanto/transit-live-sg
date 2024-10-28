@@ -10,6 +10,7 @@ const Station = ({ service, stop }) => {
           {(typeof trainStops?.[stop] === "string" && trainStops?.[stop]) ||
             "NA"}
         </div>
+
         <div className="stopCode">{stop}</div>
       </div>
     </Link>

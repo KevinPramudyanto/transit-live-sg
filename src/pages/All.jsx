@@ -7,6 +7,7 @@ const All = () => {
   const [isBusSelected, setIsBusSelected] = useState(true);
   const [isBusDropdownOpen, setIsBusDropdownOpen] = useState({});
   const [isTrainDropdownOpen, setIsTrainDropdownOpen] = useState({});
+  const [search, setSearch] = useState("");
 
   const handleBusDropdown = (service) =>
     isBusDropdownOpen?.[service]
@@ -34,32 +35,76 @@ const All = () => {
           TRAIN
         </div>
       </div>
+
+      <div className="searchContainer">
+        <label htmlFor="search">{isBusSelected ? "Bus No" : "Route"} : </label>
+        <input
+          list="searches"
+          className="search"
+          id="search"
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="start typing to filter..."
+        />
+        <datalist id="searches">
+          {busServices !== null &&
+            typeof busServices === "object" &&
+            isBusSelected &&
+            Object.keys(busServices)
+              .filter(
+                (service) =>
+                  search.length >= 2 &&
+                  service.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((service, idx) => <option key={idx} value={service} />)}
+          {trainServices !== null &&
+            typeof trainServices === "object" &&
+            !isBusSelected &&
+            Object.keys(trainServices)
+              .filter(
+                (service) =>
+                  search.length >= 2 &&
+                  service.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((service, idx) => <option key={idx} value={service} />)}
+        </datalist>
+      </div>
+
       {busServices !== null &&
         typeof busServices === "object" &&
         isBusSelected &&
-        Object.keys(busServices).map((service, idx) => (
-          <Service
-            key={idx}
-            services={busServices}
-            service={service}
-            isOpen={isBusDropdownOpen}
-            handleDropdown={handleBusDropdown}
-            isBusSelected={isBusSelected}
-          />
-        ))}
+        Object.keys(busServices)
+          .filter((service) =>
+            service.toLowerCase().includes(search.toLowerCase())
+          )
+          .map((service, idx) => (
+            <Service
+              key={idx}
+              services={busServices}
+              service={service}
+              isOpen={isBusDropdownOpen}
+              handleDropdown={handleBusDropdown}
+              isBusSelected={isBusSelected}
+            />
+          ))}
       {trainServices !== null &&
         typeof trainServices === "object" &&
         !isBusSelected &&
-        Object.keys(trainServices).map((service, idx) => (
-          <Service
-            key={idx}
-            services={trainServices}
-            service={service}
-            isOpen={isTrainDropdownOpen}
-            handleDropdown={handleTrainDropdown}
-            isBusSelected={isBusSelected}
-          />
-        ))}
+        Object.keys(trainServices)
+          .filter((service) =>
+            service.toLowerCase().includes(search.toLowerCase())
+          )
+          .map((service, idx) => (
+            <Service
+              key={idx}
+              services={trainServices}
+              service={service}
+              isOpen={isTrainDropdownOpen}
+              handleDropdown={handleTrainDropdown}
+              isBusSelected={isBusSelected}
+            />
+          ))}
     </>
   );
 };

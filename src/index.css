@@ -85,6 +85,27 @@ a {
   cursor: pointer;
 }
 
+.searchContainer {
+  margin: 50px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.searchContainer input {
+  padding: 5px;
+  text-align: left;
+  font-size: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+}
+.searchContainer input:hover {
+  border: 3px solid var(--elColor);
+}
+.searchContainer input:focus {
+  border: 3px solid var(--elColor);
+  outline: none;
+}
+
 .serviceContainer {
   margin: 50px;
   padding: 20px 40px;
