@@ -7,7 +7,8 @@ import bookmark from "../assets/bookmark.png";
 const Detail = () => {
   const [buses, setBuses] = useState({});
   const [trains, setTrains] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isGetLoading, setIsGetLoading] = useState(true);
+  const [isPostLoading, setIsPostLoading] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
   let nextDuration = "NA";
@@ -18,7 +19,7 @@ const Detail = () => {
   let next3Load = "green";
 
   const getBuses = async () => {
-    setIsLoading(true);
+    setIsGetLoading(true);
     try {
       const res = await fetch(
         "https://arrivelah2.busrouter.sg/?id=" + params.stop
@@ -31,11 +32,11 @@ const Detail = () => {
     } catch (error) {
       console.error(error);
     }
-    setIsLoading(false);
+    setIsGetLoading(false);
   };
 
   const getTrains = async () => {
-    setIsLoading(true);
+    setIsGetLoading(true);
     try {
       const res = await fetch("https://sg-rail-crowd.cheeaun.workers.dev");
       if (!res.ok) {
@@ -46,7 +47,7 @@ const Detail = () => {
     } catch (error) {
       console.error(error);
     }
-    setIsLoading(false);
+    setIsGetLoading(false);
   };
 
   useEffect(() => {
@@ -59,7 +60,7 @@ const Detail = () => {
     }
   }, []);
 
-  if (!isLoading && params.mode === "bus") {
+  if (!isGetLoading && params.mode === "bus") {
     for (const item of (Array.isArray(buses?.services) && buses?.services) ||
       []) {
       if (item?.no === params.service) {
@@ -126,7 +127,7 @@ const Detail = () => {
     }
   }
 
-  if (!isLoading && params.mode === "train") {
+  if (!isGetLoading && params.mode === "train") {
     for (const item of (Array.isArray(trains?.data) && trains?.data) || []) {
       if (item?.station === params.stop) {
         nextLoad = item?.crowdLevel || "green";
@@ -145,7 +146,7 @@ const Detail = () => {
   }
 
   const postBookmark = async () => {
-    setIsLoading(true);
+    setIsPostLoading(true);
     try {
       const res = await fetch(
         "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks",
@@ -175,7 +176,7 @@ const Detail = () => {
     } catch (error) {
       console.error(error);
     }
-    setIsLoading(false);
+    setIsPostLoading(false);
   };
 
   return (
@@ -186,13 +187,10 @@ const Detail = () => {
           {params.mode === "train" && "Route "}
           {params.service}
         </div>
-        <img
-          src={bookmark}
-          alt="bookmark"
-          onClick={() => {
-            postBookmark();
-          }}
-        />
+        {!isPostLoading && (
+          <img src={bookmark} alt="bookmark" onClick={postBookmark} />
+        )}
+        {isPostLoading && <div className="smallLoader"></div>}
         <div>
           <div className="stopName">
             {params.mode === "bus" &&
@@ -213,7 +211,7 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      {!isLoading && (
+      {!isGetLoading && (
         <div
           className="duration"
           onClick={params.mode === "bus" ? getBuses : getTrains}
@@ -228,7 +226,7 @@ const Detail = () => {
           </div>
         </div>
       )}
-      {isLoading && (
+      {isGetLoading && (
         <div className="duration">
           <div className="loader"></div>
         </div>

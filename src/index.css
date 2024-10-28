@@ -22,6 +22,29 @@ a {
   text-decoration: none;
 }
 
+.loader {
+  width: 300px;
+  aspect-ratio: 1;
+  margin: 50px auto;
+  border: 20px solid;
+  border-color: var(--elColor) var(--bgColor);
+  border-radius: 50%;
+  animation: rotate 1s infinite;
+}
+.smallLoader {
+  width: 40px;
+  aspect-ratio: 1;
+  border: 3px solid;
+  border-color: var(--elColor) var(--bgColor);
+  border-radius: 50%;
+  animation: rotate 1s infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(180deg);
+  }
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -178,21 +201,6 @@ a {
 
 .duration .subsequent {
   font-size: 100px;
-}
-
-.loader {
-  width: 300px;
-  aspect-ratio: 1;
-  margin: 50px auto;
-  border: 20px solid;
-  border-color: var(--elColor) var(--bgColor);
-  border-radius: 50%;
-  animation: rotate 1s infinite;
-}
-@keyframes rotate {
-  to {
-    transform: rotate(180deg);
-  }
 }
 
 .bookmarkContainer {
