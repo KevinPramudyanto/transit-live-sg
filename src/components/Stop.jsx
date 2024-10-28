@@ -1,5 +1,5 @@
 import React from "react";
-import { busStops } from "./busStops.js";
+import { busStops } from "../data/busStops.js";
 import { Link } from "react-router-dom";
 
 const Stop = ({ service, stop }) => {

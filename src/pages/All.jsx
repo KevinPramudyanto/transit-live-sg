@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Service from "../components/Service";
-import { busServices } from "../components/busServices.js";
-import { trainServices } from "../components/trainServices.js";
+import { busServices } from "../data/busServices.js";
+import { trainServices } from "../data/trainServices.js";
 
 const All = () => {
   const [isBusSelected, setIsBusSelected] = useState(true);

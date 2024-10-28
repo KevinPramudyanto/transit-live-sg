@@ -1,5 +1,5 @@
 import React from "react";
-import { trainStops } from "./trainStops.js";
+import { trainStops } from "../data/trainStops.js";
 import { Link } from "react-router-dom";
 
 const Station = ({ service, stop }) => {

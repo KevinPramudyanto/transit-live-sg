@@ -1,6 +1,6 @@
 import React from "react";
-import { busStops } from "../components/busStops.js";
-import { trainStops } from "../components/trainStops.js";
+import { busStops } from "../data/busStops.js";
+import { trainStops } from "../data/trainStops.js";
 import { Link } from "react-router-dom";
 import bin from "../assets/bin.png";
 

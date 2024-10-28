@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { busStops } from "../components/busStops.js";
-import { trainStops } from "../components/trainStops.js";
+import { busStops } from "../data/busStops.js";
+import { trainStops } from "../data/trainStops.js";
 import bookmark from "../assets/bookmark.png";
 
 const Detail = () => {
