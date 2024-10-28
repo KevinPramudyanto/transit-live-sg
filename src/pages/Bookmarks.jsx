@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Bookmark from "../components/Bookmark.jsx";
+import book from "../assets/book.png";
 
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState({});
@@ -62,7 +63,14 @@ const Bookmarks = () => {
           ))}
       {!isLoading &&
         Array.isArray(bookmarks.records) &&
-        bookmarks.records.length === 0 && <div>Your bookmarks is empty</div>}
+        bookmarks.records.length === 0 && (
+          <div className="noContainer">
+            <div>
+              <img src={book} alt="empty bookmarks" />
+            </div>
+            <div>No bookmarks yet</div>
+          </div>
+        )}
       {isLoading && <div className="loader"></div>}
     </>
   );

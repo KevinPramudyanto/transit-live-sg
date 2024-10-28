@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Service from "../components/Service";
 import { busServices } from "../data/busServices.js";
 import { trainServices } from "../data/trainServices.js";
+import emptyFolder from "../assets/emptyFolder.png";
 
 const All = () => {
   const [isBusSelected, setIsBusSelected] = useState(true);
@@ -93,7 +94,14 @@ const All = () => {
         isBusSelected &&
         Object.keys(busServices).filter((service) =>
           service.toLowerCase().includes(search.toLowerCase())
-        ).length === 0 && <div>No bus matches your query</div>}
+        ).length === 0 && (
+          <div className="noContainer">
+            <div>
+              <img src={emptyFolder} alt="empty search" />
+            </div>
+            <div>No matches found</div>
+          </div>
+        )}
       {trainServices !== null &&
         typeof trainServices === "object" &&
         !isBusSelected &&
@@ -116,7 +124,14 @@ const All = () => {
         !isBusSelected &&
         Object.keys(trainServices).filter((service) =>
           service.toLowerCase().includes(search.toLowerCase())
-        ).length === 0 && <div>No train matches your query</div>}
+        ).length === 0 && (
+          <div className="noContainer">
+            <div>
+              <img src={emptyFolder} alt="empty search" />
+            </div>
+            <div>No matches found</div>
+          </div>
+        )}
     </>
   );
 };
