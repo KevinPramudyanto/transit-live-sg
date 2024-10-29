@@ -3,6 +3,7 @@ import Service from "../components/Service";
 import { busServices } from "../data/busServices.js";
 import { trainServices } from "../data/trainServices.js";
 import emptyFolder from "../assets/emptyFolder.png";
+import loupe from "../assets/loupe.png";
 
 const All = () => {
   const [isBusSelected, setIsBusSelected] = useState(true);
@@ -38,7 +39,6 @@ const All = () => {
       </div>
 
       <div className="searchContainer">
-        <label htmlFor="search">{isBusSelected ? "Bus No" : "Route"} : </label>
         <input
           list="searches"
           className="search"
@@ -46,7 +46,7 @@ const All = () => {
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="start typing to filter..."
+          placeholder={"Search By " + (isBusSelected ? "Bus No" : "Route")}
         />
         <datalist id="searches">
           {busServices !== null &&
@@ -70,6 +70,9 @@ const All = () => {
               )
               .map((service, idx) => <option key={idx} value={service} />)}
         </datalist>
+        <label htmlFor="search">
+          <img src={loupe} alt="loupe" />
+        </label>
       </div>
 
       {busServices !== null &&

@@ -22,23 +22,19 @@ const NotFound = () => {
   }, []);
 
   return (
-    <>
-      <div className="notfound">
-        <img
-          src={
-            (food !== null &&
-              typeof food === "object" &&
-              typeof food?.image === "string" &&
-              food?.image) ||
-            pizza
-          }
-        />
-        <div className="one">The page you are looking for does not exist.</div>
-        <div className="two">
-          Click the navbar above to go back to homepage.
-        </div>
-      </div>
-    </>
+    <div className="notfound">
+      <img
+        src={
+          (food !== null &&
+            typeof food === "object" &&
+            typeof food?.image === "string" &&
+            food?.image) ||
+          pizza
+        }
+      />
+      <div className="one">The page you are looking for does not exist.</div>
+      <div className="two">Click the navbar above to go back to homepage.</div>
+    </div>
   );
 };
 
