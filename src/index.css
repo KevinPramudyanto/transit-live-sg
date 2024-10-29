@@ -48,14 +48,51 @@ a {
   }
 }
 
-.navbar {
+.navbarContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
   padding: 20px 40px;
+  background: var(--bgSecondColor);
+  box-shadow: 0px 0px 10px var(--elSecondColor);
+}
+
+.navbarContainer .logo {
+  font-family: "Cabin Sketch", sans-serif;
+  font-size: 30px;
+}
+.navbarContainer:hover .logo {
   font-size: 40px;
-  background: rgba(0, 0, 255, 0.1);
+}
+
+.navbarContainer .navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  font-size: 22.5px;
+}
+.navbarContainer:hover .navbar {
+  font-size: 30px;
+}
+
+.navbarContainer .active {
+  padding: 4px 8px;
+  border-top: 2px solid var(--elColor);
+  border-bottom: 2px solid var(--elColor);
+}
+
+.navbarContainer .notActive {
+  padding: 4px 8px;
+  border-top: 2px solid var(--bgSecondColor);
+  border-bottom: 2px solid var(--bgSecondColor);
+  color: var(--elSecondColor);
+}
+.navbarContainer .notActive:hover {
+  padding: 4px 8px;
+  border-top: 2px solid var(--elSecondColor);
+  border-bottom: 2px solid var(--elSecondColor);
 }
 
 .filterContainer {
@@ -361,9 +398,24 @@ a {
     border-color: var(--elColor) var(--bgColor);
   }
 
-  .navbar {
+  .navbarContainer {
+    gap: 10px;
     padding: 10px 20px;
-    font-size: 20px;
+  }
+
+  .navbarContainer .logo {
+    font-size: 16px;
+  }
+  .navbarContainer:hover .logo {
+    font-size: 16px;
+  }
+
+  .navbarContainer .navbar {
+    gap: 15px;
+    font-size: 12px;
+  }
+  .navbarContainer:hover .navbar {
+    font-size: 16px;
   }
 
   .filterContainer {
