@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import UpdateModal from "../components/UpdateModal";
 import { busStops } from "../data/busStops.js";
 import { trainStops } from "../data/trainStops.js";
 import bookmark from "../assets/bookmark.png";
@@ -8,7 +9,7 @@ const Detail = () => {
   const [buses, setBuses] = useState({});
   const [trains, setTrains] = useState({});
   const [isGetLoading, setIsGetLoading] = useState(true);
-  const [isPostLoading, setIsPostLoading] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
   let nextDuration = "NA";
@@ -145,52 +146,28 @@ const Detail = () => {
     next3Load = nextLoad;
   }
 
-  const postBookmark = async () => {
-    setIsPostLoading(true);
-    try {
-      const res = await fetch(
-        "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks",
-        {
-          method: "POST",
-          headers: {
-            Authorization: import.meta.env.VITE_AUTHORIZATION,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            records: [
-              {
-                fields: {
-                  service: params.service,
-                  stop: params.stop,
-                  mode: params.mode,
-                },
-              },
-            ],
-          }),
-        }
-      );
-      if (!res.ok) {
-        throw new Error("Server Error");
-      }
-      navigate("/bookmarks");
-    } catch (error) {
-      console.error(error);
-    }
-    setIsPostLoading(false);
-  };
-
   return (
     <>
+      {showUpdateModal && (
+        <UpdateModal
+          service={params.service}
+          stop={params.stop}
+          mode={params.mode}
+          setShowUpdateModal={setShowUpdateModal}
+        />
+      )}
+
       <div className="detail">
         <div className="busNo">
           {params.mode === "bus" && "Bus No. "}
           {params.mode === "train" && "Route "}
           {params.service}
         </div>
-        {!isPostLoading && (
-          <img src={bookmark} alt="bookmark" onClick={postBookmark} />
-        )}
-        {isPostLoading && <div className="smallLoader"></div>}
+        <img
+          src={bookmark}
+          alt="bookmark"
+          onClick={() => setShowUpdateModal(true)}
+        />
         <div>
           <div className="stopName">
             {params.mode === "bus" &&
