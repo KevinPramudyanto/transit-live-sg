@@ -23,7 +23,8 @@ const All = () => {
 
   return (
     <>
-      <div className="nav">
+      <div className="filterContainer">
+        <div>Filter By :</div>
         <div
           className={isBusSelected ? "selected" : "notSelected"}
           onClick={() => setIsBusSelected(true)}
