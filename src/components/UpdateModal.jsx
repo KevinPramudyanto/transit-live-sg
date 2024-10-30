@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 
 const OverLay = (props) => {
-  const [isPostLoading, setIsPostLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const descriptionRef = useRef();
   const navigate = useNavigate();
 
   const postBookmark = async () => {
-    setIsPostLoading(true);
+    setIsLoading(true);
     try {
       const res = await fetch(
         "https://api.airtable.com/v0/app5KhAUmqFIYqpKc/bookmarks",
@@ -24,6 +25,7 @@ const OverLay = (props) => {
                   service: props.service,
                   stop: props.stop,
                   mode: props.mode,
+                  description: descriptionRef.current.value,
                 },
               },
             ],
@@ -37,14 +39,39 @@ const OverLay = (props) => {
     } catch (error) {
       console.error(error);
     }
-    setIsPostLoading(false);
+    setIsLoading(false);
   };
 
   return (
-    <div className="modal">
-      {isPostLoading && <div className="smallLoader"></div>}
-      <button onClick={postBookmark}>post</button>
-      <button onClick={() => props.setShowUpdateModal(false)}>cancel</button>
+    <div className="modalContainer">
+      <div className="modal">
+        <div className="title">
+          <label htmlFor="description">
+            {props.mode === "bus" && "Bus No. "}
+            {props.mode === "train" && "Route "}
+            {props.service} / {props.stop}
+          </label>
+          <div
+            className="closeBtn"
+            onClick={() => props.setShowUpdateModal(false)}
+            title="Close Modal"
+          >
+            X
+          </div>
+        </div>
+        <input
+          id="description"
+          type="text"
+          ref={descriptionRef}
+          placeholder="Enter your description here..."
+        />
+        {!isLoading && (
+          <div className="submitBtn" onClick={postBookmark}>
+            ADD TO BOOKMARKS
+          </div>
+        )}
+        {isLoading && <div className="submitting">ADDING IN PROGRESS...</div>}
+      </div>
     </div>
   );
 };

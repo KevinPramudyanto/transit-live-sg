@@ -8,7 +8,7 @@ import bookmark from "../assets/bookmark.png";
 const Detail = () => {
   const [buses, setBuses] = useState({});
   const [trains, setTrains] = useState({});
-  const [isGetLoading, setIsGetLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Detail = () => {
   let next3Load = "green";
 
   const getBuses = async () => {
-    setIsGetLoading(true);
+    setIsLoading(true);
     try {
       const res = await fetch(
         "https://arrivelah2.busrouter.sg/?id=" + params.stop
@@ -33,11 +33,11 @@ const Detail = () => {
     } catch (error) {
       console.error(error);
     }
-    setIsGetLoading(false);
+    setIsLoading(false);
   };
 
   const getTrains = async () => {
-    setIsGetLoading(true);
+    setIsLoading(true);
     try {
       const res = await fetch("https://sg-rail-crowd.cheeaun.workers.dev");
       if (!res.ok) {
@@ -48,7 +48,7 @@ const Detail = () => {
     } catch (error) {
       console.error(error);
     }
-    setIsGetLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Detail = () => {
     }
   }, []);
 
-  if (!isGetLoading && params.mode === "bus") {
+  if (!isLoading && params.mode === "bus") {
     for (const item of (Array.isArray(buses?.services) && buses?.services) ||
       []) {
       if (item?.no === params.service) {
@@ -128,7 +128,7 @@ const Detail = () => {
     }
   }
 
-  if (!isGetLoading && params.mode === "train") {
+  if (!isLoading && params.mode === "train") {
     for (const item of (Array.isArray(trains?.data) && trains?.data) || []) {
       if (item?.station === params.stop) {
         nextLoad = item?.crowdLevel || "green";
@@ -189,7 +189,7 @@ const Detail = () => {
         </div>
       </div>
 
-      {!isGetLoading && (
+      {!isLoading && (
         <div
           className="duration"
           onClick={params.mode === "bus" ? getBuses : getTrains}
@@ -204,7 +204,7 @@ const Detail = () => {
           </div>
         </div>
       )}
-      {isGetLoading && (
+      {isLoading && (
         <div className="duration">
           <div className="loader"></div>
         </div>

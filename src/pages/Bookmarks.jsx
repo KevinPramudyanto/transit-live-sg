@@ -41,7 +41,6 @@ const Bookmarks = () => {
     } catch (error) {
       console.error(error);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {

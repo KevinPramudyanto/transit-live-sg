@@ -25,14 +25,112 @@ a {
   text-decoration: none;
 }
 
-.modal {
+.modalContainer {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 100;
-  background: white;
+  backdrop-filter: blur(5px);
+  z-index: 10;
+}
+
+.modalContainer .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--elSecondColor);
+  border-radius: 10px;
+  background: var(--bgThirdColor);
+  animation: popup 0.3s;
+}
+@keyframes popup {
+  from {
+    scale: 0.5;
+    transform: translate(-50%, -300%);
+  }
+  to {
+    scale: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.modalContainer .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modalContainer label {
+  font-size: 30px;
+  padding: 20px;
+}
+
+.modalContainer .closeBtn {
+  font-size: 40px;
+  padding: 20px;
+  border-radius: 0 10px 0 0;
+}
+.modalContainer .closeBtn:hover {
+  background: var(--bgSecondColor);
+}
+
+.modalContainer input {
+  width: 90%;
+  padding: 10px;
+  font-size: 30px;
+  border: none;
+  border-bottom: 2px solid var(--elSecondColor);
+  background: transparent;
+}
+.modalContainer input:focus {
+  border-bottom: 5px solid var(--elSecondColor);
+  outline: none;
+}
+.modalContainer input::placeholder {
+  color: var(--elColor);
+  opacity: 1;
+}
+.modalContainer input::-ms-input-placeholder {
+  color: var(--elColor);
+}
+.modalContainer input:focus::placeholder {
+  color: transparent;
+}
+
+.modalContainer .submitBtn {
+  width: 50%;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border: 1px solid var(--elColor);
+  border-radius: 50px;
+  font-size: 20px;
+  background: var(--bgSecondColor);
+}
+.modalContainer .submitBtn:hover {
+  color: var(--bgColor);
+  background: var(--elColor);
+  cursor: pointer;
+}
+
+.modalContainer .submitting {
+  width: 50%;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border: 1px solid var(--elColor);
+  border-radius: 50px;
+  font-size: 20px;
+  color: var(--bgColor);
+  background: linear-gradient(var(--elColor) 0 0) 0/0 no-repeat var(--bgColor);
+  animation: loadingLinear 1s infinite steps(5);
+}
+@keyframes loadingLinear {
+  100% {
+    background-size: 140%;
+  }
 }
 
 .loader {
@@ -42,17 +140,9 @@ a {
   border: 20px solid;
   border-color: var(--elColor) var(--bgColor);
   border-radius: 50%;
-  animation: rotate 1s infinite;
+  animation: loadingRotate 1s infinite;
 }
-.smallLoader {
-  width: 40px;
-  aspect-ratio: 1;
-  border: 3px solid;
-  border-color: var(--elColor) var(--bgColor);
-  border-radius: 50%;
-  animation: rotate 1s infinite;
-}
-@keyframes rotate {
+@keyframes loadingRotate {
   to {
     transform: rotate(180deg);
   }
@@ -278,7 +368,8 @@ a {
 }
 
 .duration {
-  margin: 0 100px;
+  width: 500px;
+  margin: 0 auto;
   padding: 0 20px 20px 20px;
   border: 2px solid var(--elColor);
   border-radius: 50px;
@@ -410,15 +501,45 @@ a {
 }
 
 @media only screen and (max-width: 768px) {
+  .modalContainer .modal {
+    width: 300px;
+  }
+
+  .modalContainer .title {
+    margin-bottom: 10px;
+  }
+
+  .modalContainer label {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .modalContainer .closeBtn {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  .modalContainer input {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .modalContainer .submitBtn {
+    margin: 10px auto;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+
+  .modalContainer .submitting {
+    margin: 10px auto;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+
   .loader {
     width: 150px;
     margin: 25px auto;
     border: 10px solid;
-    border-color: var(--elColor) var(--bgColor);
-  }
-  .smallLoader {
-    width: 20px;
-    border: 1.5px solid;
     border-color: var(--elColor) var(--bgColor);
   }
 
@@ -546,7 +667,7 @@ a {
   }
 
   .duration {
-    margin: 0 50px;
+    width: 250px;
     padding: 0 10px 10px 10px;
   }
   .duration:hover {
@@ -616,6 +737,5 @@ a {
 
   .notfound img {
     height: 50px;
-    border-radius: 50%;
   }
 }
