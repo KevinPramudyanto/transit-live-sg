@@ -69,11 +69,25 @@ a {
 }
 
 .navbarContainer .logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbarContainer .logo div {
   font-family: "Cabin Sketch", sans-serif;
   font-size: 30px;
 }
-.navbarContainer:hover .logo {
+.navbarContainer:hover .logo div {
   font-size: 40px;
+}
+
+.navbarContainer img {
+  height: 40px;
+}
+.navbarContainer:hover img {
+  height: 50px;
 }
 
 .navbarContainer .navbar {
@@ -414,10 +428,21 @@ a {
   }
 
   .navbarContainer .logo {
+    gap: 5px;
+  }
+
+  .navbarContainer .logo div {
     font-size: 16px;
   }
-  .navbarContainer:hover .logo {
-    font-size: 16px;
+  .navbarContainer:hover .logo div {
+    font-size: 20px;
+  }
+
+  .navbarContainer img {
+    height: 20px;
+  }
+  .navbarContainer:hover img {
+    height: 25px;
   }
 
   .navbarContainer .navbar {
