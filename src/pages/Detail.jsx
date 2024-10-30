@@ -15,9 +15,12 @@ const Detail = () => {
   let nextDuration = "NA";
   let next2Duration = "NA";
   let next3Duration = "NA";
-  let nextLoad = "green";
-  let next2Load = "green";
-  let next3Load = "green";
+  let greenColor = "rgb(0,255,0)";
+  let yellowColor = "rgb(255, 255, 0)";
+  let redColor = "rgb(255, 127, 127)";
+  let nextLoad = greenColor;
+  let next2Load = greenColor;
+  let next3Load = greenColor;
 
   const getBuses = async () => {
     setIsLoading(true);
@@ -96,31 +99,31 @@ const Detail = () => {
               : 0;
         }
 
-        nextLoad = item?.next?.load || "green";
+        nextLoad = item?.next?.load || greenColor;
         if (nextLoad === "SDA") {
-          nextLoad = "yellow";
+          nextLoad = yellowColor;
         } else if (nextLoad === "LSD") {
-          nextLoad = "red";
+          nextLoad = redColor;
         } else {
-          nextLoad = "green";
+          nextLoad = greenColor;
         }
 
-        next2Load = item?.next2?.load || "green";
+        next2Load = item?.next2?.load || greenColor;
         if (next2Load === "SDA") {
-          next2Load = "yellow";
+          next2Load = yellowColor;
         } else if (next2Load === "LSD") {
-          next2Load = "red";
+          next2Load = redColor;
         } else {
-          next2Load = "green";
+          next2Load = greenColor;
         }
 
-        next3Load = item?.next3?.load || "green";
+        next3Load = item?.next3?.load || greenColor;
         if (next3Load === "SDA") {
-          next3Load = "yellow";
+          next3Load = yellowColor;
         } else if (next3Load === "LSD") {
-          next3Load = "red";
+          next3Load = redColor;
         } else {
-          next3Load = "green";
+          next3Load = greenColor;
         }
 
         break;
@@ -131,13 +134,13 @@ const Detail = () => {
   if (!isLoading && params.mode === "train") {
     for (const item of (Array.isArray(trains?.data) && trains?.data) || []) {
       if (item?.station === params.stop) {
-        nextLoad = item?.crowdLevel || "green";
+        nextLoad = item?.crowdLevel || greenColor;
         if (nextLoad === "m") {
-          nextLoad = "yellow";
+          nextLoad = yellowColor;
         } else if (nextLoad === "h") {
-          nextLoad = "red";
+          nextLoad = redColor;
         } else {
-          nextLoad = "green";
+          nextLoad = greenColor;
         }
         break;
       }
