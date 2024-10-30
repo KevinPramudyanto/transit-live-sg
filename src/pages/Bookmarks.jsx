@@ -65,7 +65,7 @@ const Bookmarks = () => {
         bookmarks.records.length === 0 && (
           <div className="noContainer">
             <div>
-              <img src={book} alt="empty bookmarks" />
+              <img src={book} alt="empty bookmarks" title="No bookmarks yet" />
             </div>
             <div>No bookmarks yet</div>
           </div>

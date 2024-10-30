@@ -71,7 +71,7 @@ const All = () => {
               )
               .map((service, idx) => <option key={idx} value={service} />)}
         </datalist>
-        <label htmlFor="search">
+        <label htmlFor="search" title="Search">
           <img src={loupe} alt="loupe" />
         </label>
       </div>
@@ -101,7 +101,11 @@ const All = () => {
         ).length === 0 && (
           <div className="noContainer">
             <div>
-              <img src={emptyFolder} alt="empty search" />
+              <img
+                src={emptyFolder}
+                alt="empty search"
+                title="No matches found"
+              />
             </div>
             <div>No matches found</div>
           </div>
@@ -131,7 +135,11 @@ const All = () => {
         ).length === 0 && (
           <div className="noContainer">
             <div>
-              <img src={emptyFolder} alt="empty search" />
+              <img
+                src={emptyFolder}
+                alt="empty search"
+                title="No matches found"
+              />
             </div>
             <div>No matches found</div>
           </div>

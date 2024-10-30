@@ -5,7 +5,7 @@ import bus from "../assets/bus.png";
 const Navbar = () => {
   return (
     <div className="navbarContainer">
-      <Link className="logo" to="/all">
+      <Link className="logo" to="/all" title="TransitLive Home">
         <img src={bus} alt="logo" />
         <div>TransitLive SG</div>
       </Link>

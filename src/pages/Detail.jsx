@@ -167,6 +167,7 @@ const Detail = () => {
           src={bookmark}
           alt="bookmark"
           onClick={() => setShowUpdateModal(true)}
+          title="Open Modal"
         />
         <div>
           <div className="stopName">
@@ -194,13 +195,17 @@ const Detail = () => {
           className="duration"
           onClick={params.mode === "bus" ? getBuses : getTrains}
         >
-          <div className="next" style={{ color: nextLoad }}>
+          <div className="next" style={{ color: nextLoad }} title="Next">
             {nextDuration}
           </div>
           <div className="subsequent">
-            <span style={{ color: next2Load }}>{next2Duration}</span>
+            <span style={{ color: next2Load }} title="Subsequent">
+              {next2Duration}
+            </span>
             {" , "}
-            <span style={{ color: next3Load }}>{next3Duration}</span>
+            <span style={{ color: next3Load }} title="Subsequent">
+              {next3Duration}
+            </span>
           </div>
         </div>
       )}

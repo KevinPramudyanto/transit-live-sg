@@ -47,7 +47,12 @@ const Bookmark = ({ record, deleteBookmark }) => {
         </div>
       </Link>
 
-      <img src={bin} alt="delete" onClick={() => deleteBookmark(record.id)} />
+      <img
+        src={bin}
+        alt="delete"
+        onClick={() => deleteBookmark(record.id)}
+        title="Delete"
+      />
     </div>
   );
 };

@@ -31,6 +31,8 @@ const NotFound = () => {
             food?.image) ||
           pizza
         }
+        alt="random food"
+        title="Random Food"
       />
       <div className="one">The page you are looking for does not exist.</div>
       <div className="two">Click the navbar above to go back to homepage.</div>
