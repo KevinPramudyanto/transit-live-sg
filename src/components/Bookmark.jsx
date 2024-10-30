@@ -7,7 +7,9 @@ import bin from "../assets/bin.png";
 const Bookmark = ({ record, deleteBookmark }) => {
   return (
     <>
-      <div className="bookmarkDescription">{record.fields.description}</div>
+      <div className="bookmarkDescription">
+        {record?.fields?.description || "General Purpose"}
+      </div>
       <div className="bookmarkContainer">
         <Link
           to={
