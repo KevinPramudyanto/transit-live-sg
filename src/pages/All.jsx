@@ -48,6 +48,7 @@ const All = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={"Search By " + (isBusSelected ? "Bus No" : "Route")}
+          maxLength="10"
         />
         <datalist id="searches">
           {busServices !== null &&

@@ -64,6 +64,7 @@ const OverLay = (props) => {
           type="text"
           ref={descriptionRef}
           placeholder="Enter your description here..."
+          maxLength="50"
         />
         {!isLoading && (
           <div className="submitBtn" onClick={postBookmark}>
