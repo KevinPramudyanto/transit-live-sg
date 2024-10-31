@@ -30,7 +30,7 @@ TransitLive SG is a web based public transport tool, mainly for tracking bus and
     - Create table with the following column: service, stop, mode, description
     - Choose single line text for each column
 
-3.  Create .env
+3.  Environment Variables
 
     - Create .env file in the root directory, and add the following line :
 
@@ -51,38 +51,67 @@ TransitLive SG is a web based public transport tool, mainly for tracking bus and
 
 ## App Description
 
-There are 4 pages in total.
+There are 4 pages in total. Upon landing, user would be redirected to Main page where they can see all listed bus and train.
 
 ### Main
 
 <img src="./images/mainMenu.png" alt="Main Page" width="450">
 
-Upon landing.
+User would be able to filter and search the bus/train they would like to track.
+
+<img src="./images/mainMenuOpen.png" alt="Main Page - Open" width="450">
+
+They would also be able to select a bus service or train route. This would suggest the respective bus stop or train station accordingly.
+
+Upon clicking of the particular bus stop or train station, user would be redirected to Details page.
 
 ### Details
 
 <img src="./images/detailPage.png" alt="Details Page" width="450">
 
-The detail information
+Contains detail information about the selected bus or train, such as number, stop name, stop code, road, estimated time arrival, and crowd density
+
+User can also add this item to bookmarks. They are given a choice to describe it or can also be left blank.
+
+<img src="./images/detailPageOpen.png" alt="Details Page - Open" width="450">
+
+Upon adding of the item to bookmarks, user would be redirected to Bookmarks page and display it accordingly.
 
 ### Bookmarks
 
 <img src="./images/bookmarksPage.png" alt="Bookmarks Page" width="450">
 
-Here is what the user can customize:
+All bookmarks will be displayed in descending order by created time. Each item also can be removed from bookmarks.
+
+### Not Found
+
+<img src="./images/notFoundPage.png" alt="Not Found Page" width="450">
+
+Upon landing on Not Found page, users will be displayed random food images.
 
 ## Technologies Used
+
+### Front-End
 
 - HTML
 - CSS
 - JavaScript
 - React
 
+### API
+
+- [ArriveLah](https://github.com/cheeaun/arrivelah) for estimated time arrival
+- [sg-rail-crowd](https://github.com/cheeaun/sg-rail-crowd) for crowd density
+- [Foodish](https://github.com/surhud004/Foodish) for random food images in Not Found page
+
 ## Next Steps
 
 Features to implement in the future:
 
-- Add login features
+- Sign in and Sign up
+- Comment section for different user to share their comment
+- Utilize OneMap API and Geolocation API to get nearest bus/train
+- Pagination or Infinite Scroll
 
 ## Attributions
 
