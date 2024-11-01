@@ -10,7 +10,10 @@
   - [Main](#main)
   - [Details](#details)
   - [Bookmarks](#bookmarks)
+  - [Not Found](#not-found)
 - [Technologies Used](#technologies-used)
+  - [Front-End](#front-end)
+  - [API](#api)
 - [Next Steps](#next-steps)
 - [Attributions](#attributions)
 
@@ -22,12 +25,12 @@ TransitLive SG is a web based public transport tool, mainly for tracking bus and
 
 1.  Setup
 
-    - Clone this repository to your local machine.
+    - Clone this repository: https://github.com/KevinPramudyanto/transit-live-sg.git
 
 2.  Create Airtable
 
     - Sign up at [Airtable](https://airtable.com)
-    - Create table with the following column: service, stop, mode, description
+    - Create table with the following column: `service` , `stop` , `mode` , `description`
     - Choose single line text for each column
 
 3.  Environment Variables
@@ -35,7 +38,7 @@ TransitLive SG is a web based public transport tool, mainly for tracking bus and
     - Create .env file in the root directory, and add the following line :
 
       ```
-      VITE_AUTHORIZATION=<your-airtable-token>
+      VITE_AUTHORIZATION=Bearer <your-airtable-token>
       ```
 
       with `<your-airtable-token>` is your airtable secret API token
@@ -48,6 +51,10 @@ TransitLive SG is a web based public transport tool, mainly for tracking bus and
       npm i
       npm run dev
       ```
+
+5.  Live URL
+
+    - Alternatively, the app is also available at https://transit-live-sg.netlify.app
 
 ## App Description
 
@@ -63,15 +70,15 @@ User would be able to filter and search the bus/train they would like to track.
 
 They would also be able to select a bus service or train route. This would suggest the respective bus stop or train station accordingly.
 
-Upon clicking of the particular bus stop or train station, user would be redirected to Details page.
+Upon clicking of that particular bus stop or train station, user would be redirected to Details page.
 
 ### Details
 
 <img src="./images/detailPage.png" alt="Details Page" width="450">
 
-Contains detail information about the selected bus or train, such as number, stop name, stop code, road, estimated time arrival, and crowd density
+Contains detail information about the selected bus or train, such as number, stop name, stop code, road, estimated time arrival, and crowd density.
 
-User can also add this item to bookmarks. They are given a choice to describe it or can also be left blank.
+User can also add this item to bookmarks. They would be given a choice to describe it or can also be left blank.
 
 <img src="./images/detailPageOpen.png" alt="Details Page - Open" width="450">
 
@@ -103,26 +110,27 @@ Upon landing on Not Found page, users will be displayed random food images.
 - [ArriveLah](https://github.com/cheeaun/arrivelah) for estimated time arrival
 - [sg-rail-crowd](https://github.com/cheeaun/sg-rail-crowd) for crowd density
 - [Foodish](https://github.com/surhud004/Foodish) for random food images in Not Found page
+- [Airtable](https://airtable.com) for storing data
 
 ## Next Steps
 
 Features to implement in the future:
 
-- Sign in and Sign up
-- Comment section for different user to share their comment
+- Sign up and sign in
+- Comment section for different user to share their review for a particular bus/train
 - Utilize OneMap API and Geolocation API to get nearest bus/train
-- Pagination or Infinite Scroll
+- Pagination or infinite scroll
 
 ## Attributions
 
 - [Google Fonts](https://fonts.google.com/specimen/Exo+2) for Exo 2 font family
 - [Google Fonts](https://fonts.google.com/specimen/Cabin+Sketch) for Cabin Sketch font family
-- [Flaticon](https://www.flaticon.com/free-icon/bin_9790368) for bin icon in the bookmarks page
-- [Flaticon](https://www.flaticon.com/free-icon/book_6983232) for book icon in the main page
-- [Flaticon](https://www.flaticon.com/free-icon/star_10703080) for bookmark icon in the details page
 - [Flaticon](https://www.flaticon.com/free-icon/bus-school_3066259) for bus icon in the navbar
-- [Flaticon](https://www.flaticon.com/free-icon/empty-folder_7486768) for empty folder icon in the main page
 - [Flaticon](https://www.flaticon.com/free-icon/loupe_751381) for loupe icon in the main page
+- [Flaticon](https://www.flaticon.com/free-icon/empty-folder_7486768) for empty folder icon in the main page
+- [Flaticon](https://www.flaticon.com/free-icon/star_10703080) for bookmark icon in the details page
+- [Flaticon](https://www.flaticon.com/free-icon/bin_9790368) for bin icon in the bookmarks page
+- [Flaticon](https://www.flaticon.com/free-icon/book_6983232) for book icon in the bookmarks page
 - [Flaticon](https://www.flaticon.com/free-icon/pizza_2454219) for pizza icon in the not found page
 - [MDN](https://developer.mozilla.org/en-US) for CSS and JavaScript references
 - [React Documentation](https://react.dev) for React references
